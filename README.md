@@ -14,3 +14,23 @@ Tengo entendido que hay que instalar GitHub Desktop (no pesa nada y tarda 2 segu
 3. Cuando acabes de trabajar en el proyecto, haces commit y push para guardarlo en el repositorio de GitHub online. **Es obligatorio y muy importante** poner en el mensaje del commit lo que has actualizado en el proyecto, ya que ese será el título de este. Si no lo pones los demás no sabremos que has cambiado y eso puede llegar a dar problemas de coordinación.
 
 4. Como paso opcional, no está de más que, tal como has avisado de que has empezado a trabajar, avises también cuando terminas y así podemos saber que ya hay una nueva versión del proyecto y revisarla o al menos saber que se ha acabado de modificar.
+
+# ROLES DEL PROYECTO
+
+**TAREAS A REALIZAR**
+- Memoria / Documentación
+- Aplicación en Java Swing
+- Página web
+- Presentación
+- Base de datos
+
+  **ARTURO:** Página web
+  
+  **THAIS:** Base de datos
+  
+  **IKER:** Documentación
+  
+  **FERRÁN:** Presentación
+  
+
+  **LA APLICACIÓN EN SWING SE REALIZARÁ POR TODOS LOS INTEGRANTES DEL GRUPO**
