@@ -25,8 +25,12 @@ Tengo entendido que hay que instalar GitHub Desktop (no pesa nada y tarda 2 segu
 - Base de datos
 
   **ARTURO:** Página web
-  **THAIS:** Base de daots
+  
+  **THAIS:** Base de datos
+  
   **IKER:** Documentación
+  
   **FERRÁN:** Presentación
+  
 
   **LA APLICACIÓN EN SWING SE REALIZARÁ POR TODOS LOS INTEGRANTES DEL GRUPO**
