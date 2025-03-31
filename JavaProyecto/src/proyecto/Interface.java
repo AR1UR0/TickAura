@@ -17,6 +17,8 @@ import javax.imageio.ImageIO;
  */
 public class Interface extends javax.swing.JFrame {
 
+    private int enPantalla;
+    
     /**
      * Creates new form Interface
      */
@@ -26,6 +28,7 @@ public class Interface extends javax.swing.JFrame {
         PanelTitulo.setVisible(true);
         PanelEventos.setVisible(false);
         InicioProximosEventos();
+        enPantalla = PanelTitulo.getY();
     }
 
     /**
@@ -45,11 +48,17 @@ public class Interface extends javax.swing.JFrame {
         destacados = new javax.swing.JPanel();
         PanelEventos = new javax.swing.JPanel();
         TituloEventos = new javax.swing.JLabel();
+        EventosE = new javax.swing.JToggleButton();
+        InicioE = new javax.swing.JToggleButton();
+        tipoEvento = new javax.swing.JComboBox<>();
+        precioEvento = new javax.swing.JSlider();
+        valorPrecioEvento = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TickAura");
 
-        PanelGeneral.setMinimumSize(new java.awt.Dimension(100, 10000));
+        PanelGeneral.setMinimumSize(new java.awt.Dimension(100, 1500));
+        PanelGeneral.setPreferredSize(new java.awt.Dimension(801, 1500));
 
         PanelTitulo.setMinimumSize(new java.awt.Dimension(600, 800));
 
@@ -116,21 +125,68 @@ public class Interface extends javax.swing.JFrame {
 
         TituloEventos.setText("EVENTOS MAMAÑEMA");
 
+        EventosE.setLabel("Eventos");
+        EventosE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EventosEActionPerformed(evt);
+            }
+        });
+
+        InicioE.setLabel("Inicio");
+        InicioE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InicioEActionPerformed(evt);
+            }
+        });
+
+        tipoEvento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Concierto", "Teatro", "Evento", "Festival" }));
+        tipoEvento.setPreferredSize(new java.awt.Dimension(80, 20));
+
+        precioEvento.setMaximum(500);
+        precioEvento.setPaintLabels(true);
+        precioEvento.setValue(500);
+        precioEvento.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                precioEventoStateChanged(evt);
+            }
+        });
+
+        valorPrecioEvento.setText("TODOS");
+
         javax.swing.GroupLayout PanelEventosLayout = new javax.swing.GroupLayout(PanelEventos);
         PanelEventos.setLayout(PanelEventosLayout);
         PanelEventosLayout.setHorizontalGroup(
             PanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEventosLayout.createSequentialGroup()
-                .addGap(331, 331, 331)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TituloEventos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(329, 329, 329))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEventosLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(tipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(precioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(valorPrecioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(InicioE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EventosE)
+                .addGap(43, 43, 43))
         );
         PanelEventosLayout.setVerticalGroup(
             PanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEventosLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+            .addGroup(PanelEventosLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
                 .addComponent(TituloEventos)
-                .addGap(24, 24, 24))
+                .addGap(18, 18, 18)
+                .addGroup(PanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EventosE)
+                    .addComponent(InicioE)
+                    .addComponent(tipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(precioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valorPrecioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanelGeneralLayout = new javax.swing.GroupLayout(PanelGeneral);
@@ -140,8 +196,10 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(PanelGeneralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelGeneralLayout.createSequentialGroup()
+                        .addComponent(PanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(PanelEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PanelGeneralLayout.setVerticalGroup(
@@ -149,9 +207,9 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(PanelGeneralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(PanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9406, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addContainerGap(585, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,25 +224,50 @@ public class Interface extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(PanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 410, Short.MAX_VALUE))
+                .addContainerGap(8904, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void EventosTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventosTActionPerformed
         // TODO add your handling code here:
         PanelTitulo.hide();
+        PanelEventos.setLocation(PanelEventos.getX(), enPantalla);
         PanelEventos.show();
     }//GEN-LAST:event_EventosTActionPerformed
 
     private void InicioTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioTActionPerformed
         // TODO add your handling code here:
-        PanelTitulo.show();
         PanelEventos.hide();
+        PanelTitulo.show();
         InicioProximosEventos();
     }//GEN-LAST:event_InicioTActionPerformed
+
+    private void InicioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioEActionPerformed
+        // TODO add your handling code here:
+        PanelEventos.hide();
+        PanelTitulo.show();
+        InicioProximosEventos();
+    }//GEN-LAST:event_InicioEActionPerformed
+
+    private void EventosEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventosEActionPerformed
+        // TODO add your handling code here:
+        PanelTitulo.hide();
+        PanelEventos.setLocation(PanelEventos.getX(), enPantalla);
+        PanelEventos.show();
+    }//GEN-LAST:event_EventosEActionPerformed
+
+    private void precioEventoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_precioEventoStateChanged
+        // TODO add your handling code here:
+        if (precioEvento.getValue() == 500) {
+            valorPrecioEvento.setText("TODOS");
+        } else {
+            valorPrecioEvento.setText("< "+precioEvento.getValue()+"€");
+        }
+    }//GEN-LAST:event_precioEventoStateChanged
 
     public void InicioProximosEventos() {
         
@@ -251,7 +334,9 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton EventosE;
     private javax.swing.JToggleButton EventosT;
+    private javax.swing.JToggleButton InicioE;
     private javax.swing.JToggleButton InicioT;
     private javax.swing.JPanel PanelEventos;
     private javax.swing.JPanel PanelGeneral;
@@ -259,5 +344,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel Titulo;
     private javax.swing.JLabel TituloEventos;
     private javax.swing.JPanel destacados;
+    private javax.swing.JSlider precioEvento;
+    private javax.swing.JComboBox<String> tipoEvento;
+    private javax.swing.JLabel valorPrecioEvento;
     // End of variables declaration//GEN-END:variables
 }
