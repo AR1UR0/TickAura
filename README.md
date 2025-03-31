@@ -1,7 +1,7 @@
 # TickAura
 
 Repositorio de GitHub para guardar el proyecto.
-Hemos creado este repositorio para poder trabajar todos juntos y acutalizar el contenido de trabajo para tener siempre la última versión al instante. Es importante que todos trabajemos sobre este repositorio para tener todos la misma versión del proyecto actualizada y con el trabajo de los compañeros.
+Hemos creado este repositorio para poder trabajar todos juntos y actualizar el contenido de trabajo para tener siempre la última versión al instante. Es importante que todos trabajemos sobre este repositorio para tener todos la misma versión del proyecto actualizada y con el trabajo de los compañeros.
 
 Tengo entendido que hay que instalar GitHub Desktop (no pesa nada y tarda 2 segundos), pero en el caso de que no sea necesario, lo veo muy recomendable.
 
