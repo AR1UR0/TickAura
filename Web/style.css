@@ -10,28 +10,21 @@
     font-family: Arial, sans-serif;
 }
 
-#barra-superior {
-    position: fixed;
-    font-size: 30px;
-    font-family: titulo;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    padding: 15px 0;
-    text-align: center;
-    background: linear-gradient(360deg, #ffffff, #9b30ff);
-    box-shadow: 0px 4px 10px rgba(250, 250, 250, 0.2);
-    z-index: 1000;
+body {
+    background-color: #292929;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 header {
-    background-color: rgba(24, 24, 24, 0.2);
+    background-color: #9b30ff;
     padding: 15px 20px;
     width: 100%;
     left: 0;
     z-index: 999;
-    margin-top: 70px;
+    margin: 0;
+    margin-bottom: 60px;
 }
 
 nav {
@@ -50,6 +43,7 @@ nav {
     list-style: none;
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 
 .nav-enlaces a {
@@ -60,24 +54,28 @@ nav {
 }
 
 .nav-enlaces a:hover {
-    color: #9b30ff;
+    color: #cd98ff;
+    transition: 0.5s;
+    transform: scale(1.1 );
 }
 
 .boton-inicio {
-    background-color: #9b30ff;
+    background-color: #cd98ff;
     color: #0e0e0e;
     border: none;
     padding: 8px 15px;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .boton-inicio:hover {
-    background-color: #9b30ff;
+    background-color: #debefd;
+    transform: scale(1.1);
+    transition: 0.5s;
 }
 
-#contenido-principal {
+.contenido-principal {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,7 +98,11 @@ nav {
     font-size: 30px;
     font-weight: bolder;
     color: white;
+    height: 250px;
     text-shadow: 0 0 10px rgb(0, 0, 0);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .grid-item:hover {
@@ -119,7 +121,7 @@ footer {
     left: 0;
     width: 100%;
     height: 60px;
-    background: linear-gradient(360deg, #9b30ff, #ffffff);
+    background-color: #9b30ff;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -130,6 +132,7 @@ footer {
 .titulo-footer {
     font-family: titulo;
     font-size: 24px;
+    margin-left: -170px;
     font-weight: bold;
     color: #0e0e0e;
     text-align: center;
@@ -149,4 +152,72 @@ footer {
 
 .iconos-sociales a img:hover {
     transform: scale(1.2);
+}
+
+#contenido-principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+}
+
+.filtros {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    font-weight: bolder;
+    gap: 15px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#precio {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: white;
+    border-radius: 5px;
+}
+
+#precio::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #9b30ff;
+    cursor: pointer;
+}
+
+#precio::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #9b30ff;
+    cursor: pointer;
+}
+
+#tipo-evento {
+    background-color: #9b30ff;
+    font-weight: bolder;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    border: 0;
+}
+
+#ciudad {
+    background-color: #9b30ff;
+    font-weight: bolder;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    border: 0;
 }

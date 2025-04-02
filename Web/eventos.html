@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TickAura</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <!-- Menú de Navegación -->
+    <header>
+        <nav>
+            <div class="logo"><p style="font-family: titulo;">Eventos</p></div>
+            <ul class="nav-enlaces">
+                <li><a href="./index.html">Inicio</a></li>
+                <li><a href="./eventos.html">Eventos</a></li>
+                <li><a href="./contacto.html">Contacto</a></li>
+                <li><button class="boton-inicio">Iniciar sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main id="contenido-principal" style="flex-direction: column;">
+        <!-- Filtros (Alineados horizontalmente) -->
+        <div class="filtros">
+            <select id="tipo-evento">
+                <option value="-">Tipo de Evento</option>
+                <option value="concierto">Concierto</option>
+                <option value="festival">Festival</option>
+                <option value="evento">Evento</option>
+                <option value="teatro">Teatro</option>
+            </select>
+
+            <select id="ciudad">
+                <option value="-">Ciudad</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Barcelona">Barcelona</option>
+                <option value="Valencia">Valencia</option>
+            </select>
+
+            <div class="slider-container">
+                <input type="range" id="precio" min="0" max="500" value="500">
+                <span id="precio-valor">TODOS</span>
+            </div>
+        </div>
+
+        <!-- Grid de Eventos -->
+        <div class="grid-container">
+            <div class="grid-item">Autoshow</div>
+            <div class="grid-item">Bernarda</div>
+            <div class="grid-item">Coachella</div>
+            <div class="grid-item">Coldplay</div>
+            <div class="grid-item">Comic Con</div>
+            <div class="grid-item">Don Juan Tenorio</div>
+            <div class="grid-item">Feria de la Ciencia</div>
+            <div class="grid-item">Feria del Libro</div>
+            <div class="grid-item">Gaming Expo</div>
+            <div class="grid-item">Glastongury</div>
+            <div class="grid-item">Hamlet</div>
+            <div class="grid-item">Lollapalooza</div>
+            <div class="grid-item">Melendi</div>
+            <div class="grid-item">Metallica</div>
+            <div class="grid-item">Tributo Queen</div>
+            <div class="grid-item">El Rey León</div>
+            <div class="grid-item">Rock in Rio</div>
+            <div class="grid-item">Romeo y Julieta</div>
+            <div class="grid-item">Tomorrowland</div>
+            <div class="grid-item">Shakira</div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="iconos-sociales">
+            <a href="#"><img src="./fb.png" alt="Facebook"></a>
+            <a href="#"><img src="./tw.png" alt="Twitter"></a>
+            <a href="#"><img src="./ig.png" alt="Instagram"></a>
+            <a href="#"><img src="./ws.png" alt="WhatsApp"></a>
+        </div>
+        <div class="titulo-footer">TickAura</div>
+    </footer>
+
+    <script>
+        const slider = document.getElementById("precio");
+        const precioValor = document.getElementById("precio-valor");
+
+        slider.addEventListener("input", function() {
+            if (slider.value == 500) {
+                precioValor.textContent = "TODOS";
+            } else {
+                precioValor.textContent = `<${slider.value}€`;
+            }
+        });
+    </script>
+
+    <script src="imagenes.js"></script>
+        
+</body>
+</html>
