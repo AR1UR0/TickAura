@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TickAura</title>
     <link rel="stylesheet" href="style.css">
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
@@ -48,7 +49,7 @@
 
         <!-- Grid de Eventos -->
         <div class="grid-container">
-            <div class="grid-item" data-evento="Autoshow">Autoshow</div>
+            <div class="grid-item" data-evento="auto show">Auto Show</div>
             <div class="grid-item" data-evento="Bernarda">Bernarda</div>
             <div class="grid-item" data-evento="Coachella">Coachella</div>
             <div class="grid-item" data-evento="Coldplay">Coldplay</div>
@@ -97,6 +98,19 @@
     </script>
 
     <script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+        const gridItems = document.querySelectorAll(".grid-item");
+
+        gridItems.forEach(item => {
+            item.addEventListener("click", () => {
+                const eventoId = item.getAttribute("data-evento"); // Obtener el identificador del evento
+                window.location.href = `detalle-evento.html?evento=${eventoId}`; // Redirigir a la página con el parámetro
+            });
+        });
+    });
+
+
         // Función para cargar el archivo JSON
 async function cargarEventos() {
     try {
