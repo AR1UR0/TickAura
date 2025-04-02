@@ -1,24 +1,28 @@
 CREATE TABLE usuarios (
     id_Usuarios VARCHAR2(10),
-    nombre VARCHAR(100),
-    email VARCHAR(100),
-    contrasenya VARCHAR(255) NOT NULL,
+    nombre VARCHAR2(100),
+    email VARCHAR2(100),
+    contrasenya VARCHAR2(255) NOT NULL,
     fecha_registro DATE,
     CONSTRAINT PK_usuarios_id_usuarios PRIMARY KEY (id_Usuarios)
 );
 
 CREATE TABLE eventos (
     id_eventos VARCHAR2(10),
-    nombre VARCHAR(100),
+    nombre VARCHAR2(100),
     fecha DATE ,
-    ubicacion VARCHAR(255) ,
+    ubicacion VARCHAR2(255) ,
     precio DECIMAL(10,2),
+    destacado BOOLEAN,
+    imagen LONGBLOB,
+    tipo VARCHAR2(50),
     CONSTRAINT PK_eventos_id_eventos PRIMARY KEY (id_eventos)
+    CONSTRAINT CK_tipos_evento CHECK(tipo in('Concierto', 'Teatro', 'Evento', 'Festival')),
 );
 
 CREATE TABLE entradas (
     id_entradas VARCHAR2(10),
-    nombre VARCHAR(100),
+    nombre VARCHAR2(100),
     id_usuario VARCHAR2(10),
     id_eventos VARCHAR2(10),
     fecha_compra DATE,
@@ -42,7 +46,7 @@ CREATE TABLE pagos (
 
 CREATE TABLE grupos (
     id_grupos VARCHAR2(10),
-    nombre VARCHAR(255) NOT NULL,
+    nombre VARCHAR2(255) NOT NULL,
     descripcion VARCHAR2(255),
     id_eventos VARCHAR2(10),
     creador   VARCHAR2(50),
