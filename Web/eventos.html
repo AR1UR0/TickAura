@@ -48,28 +48,30 @@
 
         <!-- Grid de Eventos -->
         <div class="grid-container">
-            <div class="grid-item">Autoshow</div>
-            <div class="grid-item">Bernarda</div>
-            <div class="grid-item">Coachella</div>
-            <div class="grid-item">Coldplay</div>
-            <div class="grid-item">Comic Con</div>
-            <div class="grid-item">Don Juan Tenorio</div>
-            <div class="grid-item">Feria de la Ciencia</div>
-            <div class="grid-item">Feria del Libro</div>
-            <div class="grid-item">Gaming Expo</div>
-            <div class="grid-item">Glastongury</div>
-            <div class="grid-item">Hamlet</div>
-            <div class="grid-item">Lollapalooza</div>
-            <div class="grid-item">Melendi</div>
-            <div class="grid-item">Metallica</div>
-            <div class="grid-item">Tributo Queen</div>
-            <div class="grid-item">El Rey León</div>
-            <div class="grid-item">Rock in Rio</div>
-            <div class="grid-item">Romeo y Julieta</div>
-            <div class="grid-item">Tomorrowland</div>
-            <div class="grid-item">Shakira</div>
+            <div class="grid-item" data-evento="Autoshow">Autoshow</div>
+            <div class="grid-item" data-evento="Bernarda">Bernarda</div>
+            <div class="grid-item" data-evento="Coachella">Coachella</div>
+            <div class="grid-item" data-evento="Coldplay">Coldplay</div>
+            <div class="grid-item" data-evento="Comic Con">Comic Con</div>
+            <div class="grid-item" data-evento="Don Juan Tenorio">Don Juan Tenorio</div>
+            <div class="grid-item" data-evento="Feria de la Ciencia">Feria de la Ciencia</div>
+            <div class="grid-item" data-evento="Feria del Libro">Feria del Libro</div>
+            <div class="grid-item" data-evento="Gaming Expo">Gaming Expo</div>
+            <div class="grid-item" data-evento="Glastongury">Glastongury</div>
+            <div class="grid-item" data-evento="Hamlet">Hamlet</div>
+            <div class="grid-item" data-evento="Lollapalooza">Lollapalooza</div>
+            <div class="grid-item" data-evento="Melendi">Melendi</div>
+            <div class="grid-item" data-evento="Metallica">Metallica</div>
+            <div class="grid-item" data-evento="Tributo Queen">Tributo Queen</div>
+            <div class="grid-item" data-evento="El Rey León">El Rey León</div>
+            <div class="grid-item" data-evento="Rock in Rio">Rock in Rio</div>
+            <div class="grid-item" data-evento="Romeo y Julieta">Romeo y Julieta</div>
+            <div class="grid-item" data-evento="Tomorrowland">Tomorrowland</div>
+            <div class="grid-item" data-evento="Shakira">Shakira</div>
         </div>
     </main>
+
+    <div style="margin-bottom: 900px;"></div>
 
     <footer>
         <div class="iconos-sociales">
@@ -94,7 +96,81 @@
         });
     </script>
 
+    <script>
+        // Función para cargar el archivo JSON
+async function cargarEventos() {
+    try {
+      // Cargamos el archivo JSON con fetch
+      const response = await fetch('eventos.json');
+      const eventos = await response.json();
+      
+      // Obtener los filtros
+      const tipoEvento = document.getElementById('tipo-evento');
+      const ciudad = document.getElementById('ciudad');
+      const slider = document.getElementById('precio');
+      const precioValor = document.getElementById('precio-valor');
+      
+      // Mostrar el valor del slider
+      precioValor.textContent = slider.value;
+  
+      // Agregar un evento al slider para actualizar el valor
+      slider.addEventListener('input', () => {
+        precioValor.textContent = slider.value;
+        filtrarEventos(eventos, tipoEvento.value, ciudad.value, slider.value);
+      });
+  
+      // Filtrar eventos cuando se cambian los filtros
+      tipoEvento.addEventListener('change', () => {
+        filtrarEventos(eventos, tipoEvento.value, ciudad.value, slider.value);
+      });
+  
+      ciudad.addEventListener('change', () => {
+        filtrarEventos(eventos, tipoEvento.value, ciudad.value, slider.value);
+      });
+  
+      // Función para filtrar y mostrar los eventos
+      function filtrarEventos(eventos, tipo, ciudad, precio) {
+        // Limpiar los elementos del grid
+        const gridItems = document.querySelectorAll('.grid-item');
+        gridItems.forEach(item => {
+          item.style.display = 'block';  // Por defecto, todos son visibles
+        });
+  
+        // Filtrar eventos según los filtros seleccionados
+        eventos.forEach(evento => {
+          const eventoNombre = evento.nombre;
+          const tipoEvento = evento.tipo;
+          const ubicacionEvento = evento.ubicacion;
+          const precioEvento = evento.precio;
+  
+          // Buscar el elemento de la cuadrícula correspondiente al nombre del evento
+          const gridItem = document.querySelector(`.grid-item[data-evento="${eventoNombre}"]`);
+  
+          // Condiciones de filtrado
+          const filtroTipo = tipo === '-' || tipoEvento === tipo;
+          const filtroCiudad = ciudad === '-' || ubicacionEvento === ciudad;
+          const filtroPrecio = precioEvento <= precio;
+  
+          // Si no pasa alguna condición, ocultamos el evento en el grid
+          if (!(filtroTipo && filtroCiudad && filtroPrecio)) {
+            gridItem.style.display = 'none';
+          }
+        });
+      }
+  
+      // Inicializamos la primera filtración
+      filtrarEventos(eventos, tipoEvento.value, ciudad.value, slider.value);
+  
+    } catch (error) {
+      console.error('Error al cargar el archivo JSON:', error);
+    }
+  }
+  
+  // Llamamos a la función para cargar los eventos cuando la página esté lista
+  window.onload = cargarEventos;
+    </script>
+
     <script src="imagenes.js"></script>
-        
+
 </body>
 </html>
