@@ -221,3 +221,40 @@ footer {
     padding: 5px;
     border: 0;
 }
+
+.evento-detalle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#evento-imagen {
+    width: fit-content;
+    max-width: 900px;
+    height: 540px;
+    object-fit: contain;
+    object-position: center;
+    margin-left: 50px;
+}
+
+.evento-info {
+    flex: 1;
+    padding-left: 40px;
+    font-size: 130%;
+}
+
+.evento-info h1{
+    color: white;
+}
+
+.evento-info p{
+    color: rgb(192, 192, 192);
+}
+
+.vertical-divider {
+    width: 10px;
+    border: 3px solid #9b30ff;
+    height: 500px;
+    background-color: #9b30ff;
+    margin: 0 50px;
+}
