@@ -18,6 +18,7 @@
                 <li><a href="./eventos.html">Eventos</a></li>
                 <li><a href="./contacto.html">Contacto</a></li>
                 <li><button class="boton-inicio">Iniciar sesión</button></li>
+                <li><img src="./carrito.png" alt=" "></li>
             </ul>
         </nav>
     </header>
@@ -98,90 +99,16 @@
     </script>
 
     <script>
-
-  document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener("DOMContentLoaded", () => {
         const gridItems = document.querySelectorAll(".grid-item");
 
         gridItems.forEach(item => {
             item.addEventListener("click", () => {
-                const eventoId = item.getAttribute("data-evento"); // Obtener el identificador del evento
-                window.location.href = `detalle-evento.html?evento=${eventoId}`; // Redirigir a la página con el parámetro
+                const eventoId = item.getAttribute("data-evento");
+                window.location.href = `detalle-evento.html?evento=${eventoId}`;
             });
         });
     });
-
-
-        // Función para cargar el archivo JSON
-async function cargarEventos() {
-    try {
-      // Cargamos el archivo JSON con fetch
-      const response = await fetch('eventos.json');
-      const eventos = await response.json();
-      
-      // Obtener los filtros
-      const tipoEvento = document.getElementById('tipo-evento');
-      const ciudad = document.getElementById('ciudad');
-      const slider = document.getElementById('precio');
-      const precioValor = document.getElementById('precio-valor');
-      
-      // Mostrar el valor del slider
-      precioValor.textContent = slider.value;
-  
-      // Agregar un evento al slider para actualizar el valor
-      slider.addEventListener('input', () => {
-        precioValor.textContent = slider.value;
-        filtrarEventos(eventos, tipoEvento.value, ciudad.value, slider.value);
-      });
-  
-      // Filtrar eventos cuando se cambian los filtros
-      tipoEvento.addEventListener('change', () => {
-        filtrarEventos(eventos, tipoEvento.value, ciudad.value, slider.value);
-      });
-  
-      ciudad.addEventListener('change', () => {
-        filtrarEventos(eventos, tipoEvento.value, ciudad.value, slider.value);
-      });
-  
-      // Función para filtrar y mostrar los eventos
-      function filtrarEventos(eventos, tipo, ciudad, precio) {
-        // Limpiar los elementos del grid
-        const gridItems = document.querySelectorAll('.grid-item');
-        gridItems.forEach(item => {
-          item.style.display = 'block';  // Por defecto, todos son visibles
-        });
-  
-        // Filtrar eventos según los filtros seleccionados
-        eventos.forEach(evento => {
-          const eventoNombre = evento.nombre;
-          const tipoEvento = evento.tipo;
-          const ubicacionEvento = evento.ubicacion;
-          const precioEvento = evento.precio;
-  
-          // Buscar el elemento de la cuadrícula correspondiente al nombre del evento
-          const gridItem = document.querySelector(`.grid-item[data-evento="${eventoNombre}"]`);
-  
-          // Condiciones de filtrado
-          const filtroTipo = tipo === '-' || tipoEvento === tipo;
-          const filtroCiudad = ciudad === '-' || ubicacionEvento === ciudad;
-          const filtroPrecio = precioEvento <= precio;
-  
-          // Si no pasa alguna condición, ocultamos el evento en el grid
-          if (!(filtroTipo && filtroCiudad && filtroPrecio)) {
-            gridItem.style.display = 'none';
-          }
-        });
-      }
-  
-      // Inicializamos la primera filtración
-      filtrarEventos(eventos, tipoEvento.value, ciudad.value, slider.value);
-  
-    } catch (error) {
-      console.error('Error al cargar el archivo JSON:', error);
-    }
-  }
-  
-  // Llamamos a la función para cargar los eventos cuando la página esté lista
-  window.onload = cargarEventos;
     </script>
 
     <script src="imagenes.js"></script>

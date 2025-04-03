@@ -17,21 +17,22 @@
                 <li><a href="./eventos.html">Eventos</a></li>
                 <li><a href="./contacto.html">Contacto</a></li>
                 <li><button class="boton-inicio">Iniciar sesión</button></li>
+                <li><img src="./carrito.png" alt=" "></li>
             </ul>
         </nav>
     </header>
 
     <!-- Contenido Principal -->
     <main id="contenido-principal">
-        <div class="grid-container">
-            <div class="grid-item">Melendi</div>
-            <div class="grid-item">Metallica</div>
-            <div class="grid-item">Don Juan Tenorio</div>
-            <div class="grid-item">Comic Con</div>
-            <div class="grid-item">Rock in Rio</div>
-            <div class="grid-item">Tomorrowland</div>
-            <div class="grid-item">Romeo y Julieta</div>
-            <div class="grid-item">Lollapalooza</div>
+        <div class="grid-container" style="margin-top: 15px;">
+            <div class="grid-item" data-evento="Melendi">Melendi</div>
+            <div class="grid-item" data-evento="Metallica">Metallica</div>
+            <div class="grid-item" data-evento="Don Juan Tenorio">Don Juan Tenorio</div>
+            <div class="grid-item" data-evento="Comic Con">Comic Con</div>
+            <div class="grid-item" data-evento="Rock in Rio">Rock in Rio</div>
+            <div class="grid-item" data-evento="Tomorrowland">Tomorrowland</div>
+            <div class="grid-item" data-evento="Romeo y Julieta">Romeo y Julieta</div>
+            <div class="grid-item" data-evento="Lollapalooza">Lollapalooza</div>
         </div>
     </main>
 
@@ -46,6 +47,18 @@
     </footer>
 
     <script src="imagenes.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const gridItems = document.querySelectorAll(".grid-item");
+    
+            gridItems.forEach(item => {
+                item.addEventListener("click", () => {
+                    const eventoId = item.getAttribute("data-evento"); // Obtener el identificador del evento
+                    window.location.href = `detalle-evento.html?evento=${encodeURIComponent(eventoId)}`; // Redirigir a la página con el parámetro
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>

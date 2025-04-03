@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script defer src="eventos.js"></script>
     <script defer src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
@@ -19,6 +20,7 @@
                 <li><a href="./eventos.html">Eventos</a></li>
                 <li><a href="./contacto.html">Contacto</a></li>
                 <li><button class="boton-inicio">Iniciar sesión</button></li>
+                <li><img src="./carrito.png" alt=" "></li>
             </ul>
         </nav>
     </header>
@@ -31,6 +33,7 @@
                 <p><strong>Ubicación:</strong> <span id="evento-ubicacion"></span></p>
                 <p><strong>Precio:</strong> <span id="evento-precio"></span>€</p>
                 <p><strong>Disponibilidad:</strong> <span id="evento-disponibilidad"></span></p>
+                <p><strong><button id="botoncarrito">Añadir al carrito</button></strong></p>
             </div>
         </div>
 
@@ -45,6 +48,64 @@
             </div>
             <div class="titulo-footer">TickAura</div>
         </footer>
+
+        <script>
+            async function cargarDetallesEvento() {
+                const params = new URLSearchParams(window.location.search);
+                const eventoNombre = decodeURIComponent(params.get("evento")).toLowerCase(); // Decodificar y convertir a minúsculas
+        
+                try {
+                    // Cargar el archivo JSON con eventos
+                    const response = await fetch('eventos.json');
+                    const data = await response.json();
+        
+                    // Buscar el evento insensible a mayúsculas/minúsculas
+                    const evento = data.eventos.find(e => e.nombre.toLowerCase() === eventoNombre);
+        
+                    if (evento) {
+                        document.getElementById("evento-nombre").innerText = evento.nombre;
+                        document.getElementById("evento-fecha").innerText = evento.fecha;
+                        document.getElementById("evento-ubicacion").innerText = evento.ubicacion;
+                        document.getElementById("evento-precio").innerText = evento.precio + "€";
+                        document.getElementById("evento-imagen").src = evento.imagen;
+                        document.getElementById("evento-disponibilidad").textContent = evento.disponible ? "Disponible" : "Agotado";
+                    } else {
+                        document.getElementById("evento-detalle").innerHTML = "<h2>Evento no encontrado</h2>";
+                    }
+                } catch (error) {
+                    console.error("Error al cargar el evento:", error);
+                }
+            }
+        
+            cargarDetallesEvento();
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const botonCarrito = document.getElementById("botoncarrito");
+              
+                if (botonCarrito) {
+                  botonCarrito.addEventListener("click", function () {
+                    const nombreEvento = this.getAttribute("data-evento") || "Evento desconocido";
+              
+                    Swal.fire({
+                      title: `${nombreEvento} añadido al carrito`,
+                      text: "Accede al carrito para realizar el pago o continúa explorando",
+                      icon: "success",
+                      timer: 3000,
+                      showConfirmButton: false,
+                      background: "#9b30ff",
+                      color: "#ffffff",
+                      toast: true,
+                      position: "top-end",
+                      customClass: {
+                        popup: "custom-alert",
+                      },
+                    });
+                  });
+                }
+              });
+        </script>
 
 </body>
 </html>
