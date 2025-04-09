@@ -10,6 +10,17 @@
 <project name="Proyecto" default="default" basedir=".">
     <description>Builds, tests, and runs the project Proyecto.</description>
     <import file="nbproject/build-impl.xml"/>
+    <path id="classpath">
+        <fileset dir="lib">
+            <include name="ojdbc8.jar"/>
+        </fileset>
+    </path>
+
+    <target name="run" depends="compile">
+        <java classname="paquete.TuClasePrincipal" fork="true">
+            <classpath refid="classpath"/>
+        </java>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 

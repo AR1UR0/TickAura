@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Proyecto;
+package proyecto;
 
 
 import java.awt.*;
@@ -11,23 +11,28 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+// IMPORT DEL SQL
+import java.sql.*;
+
 /**
- *
+ * @version 1.1.0
  * @author DAW6K
+ * 
  */
+
 public class Interface extends javax.swing.JFrame {
 
     private int enPantalla;
     
     /**
      * Creates new form Interface
+     * 
      */
     public Interface() {
         initComponents();
         setWindowIcon();
         PanelTitulo.setVisible(true);
         PanelEventos.setVisible(false);
-        InicioProximosEventos();
         enPantalla = PanelTitulo.getY();
     }
 
@@ -46,13 +51,23 @@ public class Interface extends javax.swing.JFrame {
         EventosT = new javax.swing.JToggleButton();
         InicioT = new javax.swing.JToggleButton();
         destacados = new javax.swing.JPanel();
+        NombreEvento = new javax.swing.JTextField();
+        NombreLabel = new javax.swing.JLabel();
+        FechaEvento = new javax.swing.JTextField();
+        FechaLabel = new javax.swing.JLabel();
+        UbicacionEvento = new javax.swing.JLabel();
+        UbicacionLabel = new javax.swing.JTextField();
+        PrecioEvento = new javax.swing.JLabel();
+        PrecioLabel = new javax.swing.JTextField();
+        DestacadoLabel = new javax.swing.JLabel();
+        CheckBoxEvento = new javax.swing.JCheckBox();
+        ComboEvento = new javax.swing.JComboBox<>();
+        ComboLabel = new javax.swing.JLabel();
+        AnadirEvento = new javax.swing.JButton();
         PanelEventos = new javax.swing.JPanel();
         TituloEventos = new javax.swing.JLabel();
         EventosE = new javax.swing.JToggleButton();
         InicioE = new javax.swing.JToggleButton();
-        tipoEvento = new javax.swing.JComboBox<>();
-        precioEvento = new javax.swing.JSlider();
-        valorPrecioEvento = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TickAura");
@@ -62,7 +77,7 @@ public class Interface extends javax.swing.JFrame {
 
         PanelTitulo.setMinimumSize(new java.awt.Dimension(600, 800));
 
-        Titulo.setText("INICIO MAMAĂ‘EMA");
+        Titulo.setText("INICIO MAMAÑEMA");
 
         EventosT.setLabel("Eventos");
         EventosT.addActionListener(new java.awt.event.ActionListener() {
@@ -78,16 +93,113 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        NombreLabel.setText("Nombre:");
+
+        FechaLabel.setText("Fecha:");
+
+        UbicacionEvento.setText("Ubicación:");
+
+        UbicacionLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UbicacionLabelActionPerformed(evt);
+            }
+        });
+
+        PrecioEvento.setText("Precio:");
+
+        PrecioLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrecioLabelActionPerformed(evt);
+            }
+        });
+
+        DestacadoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DestacadoLabel.setText("DEST");
+
+        CheckBoxEvento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CheckBoxEvento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        ComboEvento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Concierto", "Evento", "Festival", "Teatro" }));
+
+        ComboLabel.setText("Tipo:");
+
+        AnadirEvento.setText("Añadir Evento");
+        AnadirEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnadirEventoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout destacadosLayout = new javax.swing.GroupLayout(destacados);
         destacados.setLayout(destacadosLayout);
         destacadosLayout.setHorizontalGroup(
             destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 632, Short.MAX_VALUE)
+            .addGroup(destacadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(NombreEvento)
+                    .addComponent(NombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(FechaEvento)
+                    .addComponent(FechaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(UbicacionLabel)
+                    .addComponent(UbicacionEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PrecioLabel)
+                    .addComponent(PrecioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(DestacadoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(CheckBoxEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ComboEvento, 0, 102, Short.MAX_VALUE)
+                    .addComponent(ComboLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, destacadosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AnadirEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(258, 258, 258))
         );
         destacadosLayout.setVerticalGroup(
             destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 218, Short.MAX_VALUE)
+            .addGroup(destacadosLayout.createSequentialGroup()
+                .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(destacadosLayout.createSequentialGroup()
+                        .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PrecioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DestacadoLabel)
+                            .addComponent(ComboLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(PrecioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CheckBoxEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ComboEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(destacadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(destacadosLayout.createSequentialGroup()
+                            .addComponent(UbicacionEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(UbicacionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(destacadosLayout.createSequentialGroup()
+                            .addComponent(FechaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(FechaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(destacadosLayout.createSequentialGroup()
+                            .addComponent(NombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(NombreEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(32, 32, 32)
+                .addComponent(AnadirEvento)
+                .addGap(116, 116, 116))
         );
+
+        NombreEvento.getAccessibleContext().setAccessibleName("");
+        FechaLabel.getAccessibleContext().setAccessibleName("Fecha:");
 
         javax.swing.GroupLayout PanelTituloLayout = new javax.swing.GroupLayout(PanelTitulo);
         PanelTitulo.setLayout(PanelTituloLayout);
@@ -105,9 +217,9 @@ public class Interface extends javax.swing.JFrame {
                         .addGap(336, 336, 336)
                         .addComponent(Titulo))
                     .addGroup(PanelTituloLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(30, 30, 30)
                         .addComponent(destacados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         PanelTituloLayout.setVerticalGroup(
             PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +235,7 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        TituloEventos.setText("EVENTOS MAMAĂ‘EMA");
+        TituloEventos.setText("EVENTOS MAMAÑEMA");
 
         EventosE.setLabel("Eventos");
         EventosE.addActionListener(new java.awt.event.ActionListener() {
@@ -139,20 +251,6 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        tipoEvento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Concierto", "Teatro", "Evento", "Festival" }));
-        tipoEvento.setPreferredSize(new java.awt.Dimension(80, 20));
-
-        precioEvento.setMaximum(500);
-        precioEvento.setPaintLabels(true);
-        precioEvento.setValue(500);
-        precioEvento.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                precioEventoStateChanged(evt);
-            }
-        });
-
-        valorPrecioEvento.setText("TODOS");
-
         javax.swing.GroupLayout PanelEventosLayout = new javax.swing.GroupLayout(PanelEventos);
         PanelEventos.setLayout(PanelEventosLayout);
         PanelEventosLayout.setHorizontalGroup(
@@ -162,13 +260,7 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(TituloEventos)
                 .addGap(329, 329, 329))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEventosLayout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(tipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(precioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(valorPrecioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(InicioE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EventosE)
@@ -182,11 +274,8 @@ public class Interface extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(PanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EventosE)
-                    .addComponent(InicioE)
-                    .addComponent(tipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(precioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valorPrecioEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(321, Short.MAX_VALUE))
+                    .addComponent(InicioE))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanelGeneralLayout = new javax.swing.GroupLayout(PanelGeneral);
@@ -198,7 +287,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(PanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelGeneralLayout.createSequentialGroup()
                         .addComponent(PanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 64, Short.MAX_VALUE))
                     .addComponent(PanelEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -209,7 +298,7 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(PanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(585, Short.MAX_VALUE))
+                .addContainerGap(586, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,95 +321,95 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-   /**
- * Método que se ejecuta cuando se pulsa el botón "Eventos" en el panel de inicio.
- * Oculta el panel de título y muestra el panel de eventos.
- * 
- * @param evt Evento de acción generado por hacer clic en el botón "Eventos".
- */
     private void EventosTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventosTActionPerformed
         // TODO add your handling code here:
         PanelTitulo.hide();
         PanelEventos.setLocation(PanelEventos.getX(), enPantalla);
         PanelEventos.show();
     }//GEN-LAST:event_EventosTActionPerformed
-/**
- * Método que se ejecuta al pulsar el botón "Inicio" desde el panel de inicio.
- * Oculta el panel de eventos y muestra el panel de título.
- * 
- * @param evt Evento de acción generado por hacer clic en el botón "Inicio".
- */
+
     private void InicioTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioTActionPerformed
         // TODO add your handling code here:
         PanelEventos.hide();
         PanelTitulo.show();
-        InicioProximosEventos();
     }//GEN-LAST:event_InicioTActionPerformed
-/**
- * Método que se ejecuta al pulsar el botón "Inicio" desde el panel de eventos.
- * Oculta el panel de eventos y muestra el panel de título.
- * 
- * @param evt Evento de acción generado por hacer clic en el botón "Inicio".
- */
+
     private void InicioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioEActionPerformed
         // TODO add your handling code here:
         PanelEventos.hide();
         PanelTitulo.show();
-        InicioProximosEventos();
     }//GEN-LAST:event_InicioEActionPerformed
-/**
- * Método que se ejecuta cuando se pulsa el botón "Eventos" desde el panel de eventos.
- * Oculta el panel de título y vuelve a mostrar el panel de eventos.
- * 
- * @param evt Evento de acción generado por hacer clic en el botón "Eventos".
- */
+
     private void EventosEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventosEActionPerformed
         // TODO add your handling code here:
         PanelTitulo.hide();
         PanelEventos.setLocation(PanelEventos.getX(), enPantalla);
         PanelEventos.show();
     }//GEN-LAST:event_EventosEActionPerformed
-/**
- * Método que se ejecuta cuando se cambia el valor del slider de precio.
- * Actualiza el texto de la etiqueta `valorPrecioEvento` para mostrar el precio seleccionado o "TODOS".
- * 
- * @param evt Evento de cambio generado por mover el slider de precio.
- */
-    private void precioEventoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_precioEventoStateChanged
-        // TODO add your handling code here:
-        if (precioEvento.getValue() == 500) {
-            valorPrecioEvento.setText("TODOS");
-        } else {
-            valorPrecioEvento.setText("< "+precioEvento.getValue()+"â‚¬");
-        }
-    }//GEN-LAST:event_precioEventoStateChanged
-/**
- * Método que se encarga de inicializar y mostrar los próximos eventos en el panel "destacados".
- * Crea 8 paneles con etiquetas que simulan eventos.
- */
-    public void InicioProximosEventos() {
-        
-        destacados.removeAll(); // Limpiar el panel antes de agregar nuevos elementos
-        destacados.setLayout(new java.awt.GridLayout(2, 4, 10, 10)); // 2 filas, 4 columnas, 10px de espacio
 
-        for (int i = 0; i < 8; i++) {
-            JPanel eventoPanel = new JPanel();
-            eventoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK));
-            eventoPanel.setPreferredSize(new java.awt.Dimension(150, 100));
+    private void UbicacionLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UbicacionLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UbicacionLabelActionPerformed
+
+    private void PrecioLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrecioLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PrecioLabelActionPerformed
+
+    private void AnadirEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnadirEventoActionPerformed
+        // TODO add your handling code here:
+        String nombre = NombreEvento.getText();
+        String fechaTexto = FechaEvento.getText(); // formato: yyyy-MM-dd
+        String ubicacion = UbicacionEvento.getText();
+        String precioTexto = PrecioEvento.getText();
+        boolean destacado = CheckBoxEvento.isSelected();
+        String tipoEvento = (String) ComboEvento.getSelectedItem();
         
-            JLabel eventoLabel = new JLabel("Evento " + (i + 1));
-            eventoPanel.add(eventoLabel);
-            
-            destacados.add(eventoPanel);
+        System.out.println("Valor de fechaTexto: [" + fechaTexto + "]");
+
+        // 2. Validaciones básicas (opcional)
+        if (nombre.isEmpty() || fechaTexto.isEmpty() || precioTexto.isEmpty() || tipoEvento == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, rellena todos los campos obligatorios.");
+            return;
         }
+
+        try {
+            // 3. Convertir tipos
+            java.sql.Date fecha = java.sql.Date.valueOf(fechaTexto); // yyyy-MM-dd
+            double precio = Double.parseDouble(precioTexto);
+            int destacadoInt = destacado ? 1 : 0;
+
+            // 4. Conectar a Oracle
+            Connection conn = OracleConnection.conectar();
+            String sql = "INSERT INTO Eventos (nombre, fecha, ubicacion, precio, destacado, tipo_evento) " +
+                     "VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ps.setDate(2, fecha);
+            ps.setString(3, ubicacion);
+            ps.setDouble(4, precio);
+            ps.setInt(5, destacadoInt);
+            ps.setString(6, tipoEvento);
+
+            int filasInsertadas = ps.executeUpdate();
+            if (filasInsertadas > 0) {
+                JOptionPane.showMessageDialog(this, "Evento añadido correctamente.");
+                // Limpia campos si quieres
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo añadir el evento.");
+            }
+
+            // 5. Cerrar conexión
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error en base de datos: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, "Formato de fecha inválido. Usa yyyy-MM-dd.");
+        }                
+    }//GEN-LAST:event_AnadirEventoActionPerformed
+
     
-        destacados.revalidate();
-        destacados.repaint();
-    }
-    /**
- * Establece el icono de la ventana a partir de un archivo local llamado "icono.png".
- * Si no se encuentra el archivo o ocurre un error, se imprime un mensaje de error en consola.
- */
     private void setWindowIcon() {
         try {
             Image icon = ImageIO.read(new File("./icono.png")); // Cargar desde archivo local
@@ -363,21 +452,33 @@ public class Interface extends javax.swing.JFrame {
                 new Interface().setVisible(true);
             }
         });
+        
+        Connection conn = OracleConnection.conectar();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AnadirEvento;
+    private javax.swing.JCheckBox CheckBoxEvento;
+    private javax.swing.JComboBox<String> ComboEvento;
+    private javax.swing.JLabel ComboLabel;
+    private javax.swing.JLabel DestacadoLabel;
     private javax.swing.JToggleButton EventosE;
     private javax.swing.JToggleButton EventosT;
+    private javax.swing.JTextField FechaEvento;
+    private javax.swing.JLabel FechaLabel;
     private javax.swing.JToggleButton InicioE;
     private javax.swing.JToggleButton InicioT;
+    private javax.swing.JTextField NombreEvento;
+    private javax.swing.JLabel NombreLabel;
     private javax.swing.JPanel PanelEventos;
     private javax.swing.JPanel PanelGeneral;
     private javax.swing.JPanel PanelTitulo;
+    private javax.swing.JLabel PrecioEvento;
+    private javax.swing.JTextField PrecioLabel;
     private javax.swing.JLabel Titulo;
     private javax.swing.JLabel TituloEventos;
+    private javax.swing.JLabel UbicacionEvento;
+    private javax.swing.JTextField UbicacionLabel;
     private javax.swing.JPanel destacados;
-    private javax.swing.JSlider precioEvento;
-    private javax.swing.JComboBox<String> tipoEvento;
-    private javax.swing.JLabel valorPrecioEvento;
     // End of variables declaration//GEN-END:variables
 }
