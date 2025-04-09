@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package proyecto;
+package Proyecto;
 
 
 import java.awt.*;
@@ -62,7 +62,7 @@ public class Interface extends javax.swing.JFrame {
 
         PanelTitulo.setMinimumSize(new java.awt.Dimension(600, 800));
 
-        Titulo.setText("INICIO MAMAÑEMA");
+        Titulo.setText("INICIO MAMAĂ‘EMA");
 
         EventosT.setLabel("Eventos");
         EventosT.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +123,7 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        TituloEventos.setText("EVENTOS MAMAÑEMA");
+        TituloEventos.setText("EVENTOS MAMAĂ‘EMA");
 
         EventosE.setLabel("Eventos");
         EventosE.addActionListener(new java.awt.event.ActionListener() {
@@ -232,43 +232,72 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+   /**
+ * Método que se ejecuta cuando se pulsa el botón "Eventos" en el panel de inicio.
+ * Oculta el panel de título y muestra el panel de eventos.
+ * 
+ * @param evt Evento de acción generado por hacer clic en el botón "Eventos".
+ */
     private void EventosTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventosTActionPerformed
         // TODO add your handling code here:
         PanelTitulo.hide();
         PanelEventos.setLocation(PanelEventos.getX(), enPantalla);
         PanelEventos.show();
     }//GEN-LAST:event_EventosTActionPerformed
-
+/**
+ * Método que se ejecuta al pulsar el botón "Inicio" desde el panel de inicio.
+ * Oculta el panel de eventos y muestra el panel de título.
+ * 
+ * @param evt Evento de acción generado por hacer clic en el botón "Inicio".
+ */
     private void InicioTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioTActionPerformed
         // TODO add your handling code here:
         PanelEventos.hide();
         PanelTitulo.show();
         InicioProximosEventos();
     }//GEN-LAST:event_InicioTActionPerformed
-
+/**
+ * Método que se ejecuta al pulsar el botón "Inicio" desde el panel de eventos.
+ * Oculta el panel de eventos y muestra el panel de título.
+ * 
+ * @param evt Evento de acción generado por hacer clic en el botón "Inicio".
+ */
     private void InicioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioEActionPerformed
         // TODO add your handling code here:
         PanelEventos.hide();
         PanelTitulo.show();
         InicioProximosEventos();
     }//GEN-LAST:event_InicioEActionPerformed
-
+/**
+ * Método que se ejecuta cuando se pulsa el botón "Eventos" desde el panel de eventos.
+ * Oculta el panel de título y vuelve a mostrar el panel de eventos.
+ * 
+ * @param evt Evento de acción generado por hacer clic en el botón "Eventos".
+ */
     private void EventosEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventosEActionPerformed
         // TODO add your handling code here:
         PanelTitulo.hide();
         PanelEventos.setLocation(PanelEventos.getX(), enPantalla);
         PanelEventos.show();
     }//GEN-LAST:event_EventosEActionPerformed
-
+/**
+ * Método que se ejecuta cuando se cambia el valor del slider de precio.
+ * Actualiza el texto de la etiqueta `valorPrecioEvento` para mostrar el precio seleccionado o "TODOS".
+ * 
+ * @param evt Evento de cambio generado por mover el slider de precio.
+ */
     private void precioEventoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_precioEventoStateChanged
         // TODO add your handling code here:
         if (precioEvento.getValue() == 500) {
             valorPrecioEvento.setText("TODOS");
         } else {
-            valorPrecioEvento.setText("< "+precioEvento.getValue()+"€");
+            valorPrecioEvento.setText("< "+precioEvento.getValue()+"â‚¬");
         }
     }//GEN-LAST:event_precioEventoStateChanged
-
+/**
+ * Método que se encarga de inicializar y mostrar los próximos eventos en el panel "destacados".
+ * Crea 8 paneles con etiquetas que simulan eventos.
+ */
     public void InicioProximosEventos() {
         
         destacados.removeAll(); // Limpiar el panel antes de agregar nuevos elementos
@@ -288,7 +317,10 @@ public class Interface extends javax.swing.JFrame {
         destacados.revalidate();
         destacados.repaint();
     }
-    
+    /**
+ * Establece el icono de la ventana a partir de un archivo local llamado "icono.png".
+ * Si no se encuentra el archivo o ocurre un error, se imprime un mensaje de error en consola.
+ */
     private void setWindowIcon() {
         try {
             Image icon = ImageIO.read(new File("./icono.png")); // Cargar desde archivo local
