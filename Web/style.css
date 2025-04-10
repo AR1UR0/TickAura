@@ -177,7 +177,7 @@ footer {
     font-weight: bolder;
     gap: 15px;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 15px;
 }
 
 .slider-container {
@@ -285,3 +285,85 @@ footer {
     box-shadow: #9b30ff 0 0 10px;
 }
 
+.contacto {
+    background-color: #1f1f1f;
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: white;
+}
+
+.contacto h2 {
+    font-family: titulo;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.contacto p {
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.formulario-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: white;
+}
+
+.campo label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.campo input,
+.campo textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3a3a3a;
+    color: white;
+    font-size: 16px;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+    outline: 2px solid #9b30ff;
+}
+
+.boton-contacto {
+    background-color: #cd98ff;
+    color: #0e0e0e;
+    border: none;
+    padding: 12px 20px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.boton-contacto:hover {
+    background-color: #debefd;
+    transform: scale(1.05);
+}
+
+em {
+    color: #9b30ff;
+    padding-top: 0;
+    padding-bottom: 70px;
+}
+
+footer a:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+}
